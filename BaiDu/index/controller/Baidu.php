@@ -85,7 +85,7 @@ class Baidu extends Controller {
 								}
 							} else {
 								//如果tmp里面存在这个内容，那么也不采集
-								\think\Db::name('tmpinfo')->where("baiduid = '$val'")->update(['getstr' => '1']);
+								//\think\Db::name('tmpinfo')->where("baiduid = '$val'")->update(['getstr' => '1']);
 								\think\Log::record($tb['name'] . '栏目下ID为：' . $val . '的在帖子,' . $preg_list[2][$key] . '已经在tmpinfo存在，不采集', 'info');
 								continue;
 							}
@@ -131,8 +131,8 @@ class Baidu extends Controller {
 					$tb = \think\Db::name('bdconfig')->where("name = '$icolumn'")->find();
 					// 抓取第一页HTML
 					$t_url = "https://tieba.baidu.com/p/{$t_id}?pn=1";
-					$t_html = $this->get_html($t_url);
-					//$t_html = file_get_contents($t_url);
+					//$t_html = $this->get_html($t_url);
+					$t_html = file_get_contents($t_url);
 					// 获取最大页数
 					preg_match("/pn=(\d*?)\"\>尾页\<\/a\>.\<\/li\>/ms", $t_html, $preg_page);
 					$page_max = isset($preg_page[1]) ? $preg_page[1] : 1;
